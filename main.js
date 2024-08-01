@@ -55,7 +55,7 @@ function buyButtonClicked(){
 function quantityChanged(e){
     var input = e.target
     if(isNaN(input.value) || input.value <= 0){
-        input.value = 1
+        input.parentElement.parentElement.remove()
     }
     updateTotal()
 }
@@ -73,6 +73,7 @@ function addCartClicked(e){
     var title = shopProducts.getElementsByClassName('product-title')[0].innerText
     var price = shopProducts.getElementsByClassName('price')[0].innerText
     var productImg = shopProducts.getElementsByClassName('product-img')[0].src
+    cart.classList.add('active')
     addProductsToCart(title, price, productImg)
     updateTotal()
 }
@@ -81,10 +82,13 @@ function addProductsToCart(title, price, productImg){
     cartShopBox.classList.add('cart-box');
     var cartItems = document.getElementsByClassName('cart-content')[0];
     var cartItemsNames = cartItems.getElementsByClassName('cart-product-title');
+    console.log(cartItemsNames)
     for ( var i = 0; i < cartItemsNames.length; i++){
-        if(cartItemsNames[i].innetText == title){
-            alert('Your have already add this item to cart.')
-            return;
+        if(cartItemsNames[i].innerText === title){
+            // alert('Your have already add this item to cart.')
+            cartItemsNames[i].parentElement.parentElement.getElementsByClassName("cart-quantity")[0].value++
+            updateTotal()
+            return
         }
     };
 var cartBoxContent = `
