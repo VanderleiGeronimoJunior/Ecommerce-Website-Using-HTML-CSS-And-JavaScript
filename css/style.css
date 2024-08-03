@@ -125,6 +125,30 @@ header{
 .cart-price{
     font-weight: 500;
 }
+input[type=number]{
+    user-select: none;
+}
+/* ------------------------ */
+.cart-content .cart-box .quantity span{
+    display: flex;
+    flex-direction: row;
+    width: 25px;
+    height: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+    color: #555;
+    cursor: pointer;
+    /* border: 1px solid rebeccapurple; */
+}
+.cart-content .cart-box .quantity span:nth-child(2){
+    background-color: transparent;
+    color: #eee;
+    cursor: auto;
+}
+.cart-content .cart-box .item:nth-child(even){
+    background-color: #eee1;
+}
+/* ------------------------ */
 .cart-quantity{
     border: 1px solid var(--text-color);
     outline-color: var(--main-color);

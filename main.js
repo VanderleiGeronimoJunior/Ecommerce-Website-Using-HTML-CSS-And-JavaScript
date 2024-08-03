@@ -82,7 +82,6 @@ function addProductsToCart(title, price, productImg){
     cartShopBox.classList.add('cart-box');
     var cartItems = document.getElementsByClassName('cart-content')[0];
     var cartItemsNames = cartItems.getElementsByClassName('cart-product-title');
-    console.log(cartItemsNames)
     for ( var i = 0; i < cartItemsNames.length; i++){
         if(cartItemsNames[i].innerText === title){
             // alert('Your have already add this item to cart.')
@@ -111,12 +110,13 @@ cartShopBox.getElementsByClassName('cart-quantity')[0].addEventListener('change'
 function updateTotal(){
     var cartContent = document.getElementsByClassName('cart-content')[0];
     var cartBoxes = document.getElementsByClassName('cart-box')
+    console.log(cartBoxes)
     var total = 0;
     for ( var i = 0; i < cartBoxes.length; i++){
         var cartBox = cartBoxes[i]
         var priceElement = cartBox.getElementsByClassName('cart-price')[0];
         var quantityElement = cartBox.getElementsByClassName('cart-quantity')[0];
-        var price = parseFloat(priceElement.innerHTML.replace('$', ''));
+        var price = parseFloat(priceElement.innerHTML.replace('R$', ''));
         var quantity = quantityElement.value;
         total = total + (price * quantity);
     }
@@ -124,5 +124,5 @@ function updateTotal(){
         //  If price Contain some Cents Value 
         total = Math.round(total *100) / 100;
 
-        document.getElementsByClassName('total-price')[0].innerText = '$ ' + total;
+        document.getElementsByClassName('total-price')[0].innerText = 'R$ ' + total;
 }
