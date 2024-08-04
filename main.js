@@ -110,8 +110,10 @@ cartShopBox.getElementsByClassName('cart-quantity')[0].addEventListener('change'
 function updateTotal(){
     var cartContent = document.getElementsByClassName('cart-content')[0];
     var cartBoxes = document.getElementsByClassName('cart-box')
-    console.log(cartBoxes)
     var total = 0;
+    if(cartBoxes.length === 0){
+        cart.classList.remove('active')
+    }
     for ( var i = 0; i < cartBoxes.length; i++){
         var cartBox = cartBoxes[i]
         var priceElement = cartBox.getElementsByClassName('cart-price')[0];
