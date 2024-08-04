@@ -93,7 +93,7 @@ header{
 }
 
 ::-webkit-scrollbar{
-    width: 5px;
+    width: 0;
 }
 
 ::-webkit-scrollbar-thumb{
