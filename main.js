@@ -95,7 +95,11 @@ var cartBoxContent = `
             <div class="detail-box">
                 <div class="cart-product-title">${title}</div>
                 <div class="cart-price">${price}</div>
-                <input type="number" value="1" class="cart-quantity">
+                <div class="cart-quantity-btn">
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
+                    <input type="number" value="1" class="cart-quantity">
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                </div>
             </div>
             <!-- Remove CArt -->
             <i class="bx bxs-trash-alt cart-remove"></i>
