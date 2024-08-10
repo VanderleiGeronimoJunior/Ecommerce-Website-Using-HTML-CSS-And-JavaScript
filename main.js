@@ -1,4 +1,3 @@
-// Cart
 let cartIcon = document.querySelector('#cart-icon');
 let cart = document.querySelector('.cart');
 let closeCart = document.querySelector('#close-cart');
@@ -96,14 +95,15 @@ var cartBoxContent = `
                 <div class="cart-product-title">${title}</div>
                 <div class="cart-price">${price}</div>
                 <div class="cart-quantity-btn">
+                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
                 <input type="number" value="1" class="cart-quantity">
+                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
                 </div>
                 </div>
                 <!-- Remove CArt -->
                 <i class="bx bxs-trash-alt cart-remove"></i>
                 `;
-{/* <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button> */}
-{/* <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button> */}
+                
 cartShopBox.innerHTML = cartBoxContent;
 cartItems.append(cartShopBox);
 cartShopBox.getElementsByClassName('cart-remove')[0].addEventListener('click', removeCartItem);
