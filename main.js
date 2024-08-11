@@ -1,5 +1,6 @@
 let cartIcon = document.querySelector('#cart-icon');
 let cart = document.querySelector('.cart');
+let cartBox = document.querySelector('.cart-box');
 let closeCart = document.querySelector('#close-cart');
 // Open Cart
 cartIcon.onclick = () => {
@@ -79,6 +80,7 @@ function addCartClicked(e){
 function addProductsToCart(title, price, productImg){
     var cartShopBox = document.createElement('div');
     cartShopBox.classList.add('cart-box');
+    const id = cartShopBox.id = Math.floor(Date.now() * Math.random()).toString(36)
     var cartItems = document.getElementsByClassName('cart-content')[0];
     var cartItemsNames = cartItems.getElementsByClassName('cart-product-title');
     for ( var i = 0; i < cartItemsNames.length; i++){
@@ -95,15 +97,15 @@ var cartBoxContent = `
                 <div class="cart-product-title">${title}</div>
                 <div class="cart-price">${price}</div>
                 <div class="cart-quantity-btn">
-                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
-                <input type="number" value="1" class="cart-quantity">
-                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                    <button type="button" class="minus" id="minus-${id}"></button>
+                    <input type="number" min='0' value="1" class="cart-quantity">
+                    <button type="button" class="plus" id="plus-${id}"></button>
                 </div>
-                </div>
+            </div>
                 <!-- Remove CArt -->
                 <i class="bx bxs-trash-alt cart-remove"></i>
                 `;
-                
+
 cartShopBox.innerHTML = cartBoxContent;
 cartItems.append(cartShopBox);
 cartShopBox.getElementsByClassName('cart-remove')[0].addEventListener('click', removeCartItem);
@@ -112,7 +114,6 @@ cartShopBox.getElementsByClassName('cart-quantity')[0].addEventListener('change'
 
 // Update Total
 function updateTotal(){
-    var cartContent = document.getElementsByClassName('cart-content')[0];
     var cartBoxes = document.getElementsByClassName('cart-box')
     var total = 0;
     if(cartBoxes.length === 0){
@@ -132,3 +133,53 @@ function updateTotal(){
 
         document.getElementsByClassName('total-price')[0].innerText = 'R$ ' + total;
 }
+
+// Eventos
+
+const decreament = (index) => {
+    var cartBoxes = document.getElementsByClassName('cart-box')
+    if(cartBoxes.length === 0){
+        cart.classList.remove('active')
+    }
+        for ( var i = 0; i < cartBoxes.length; i++){
+            var cartBox = cartBoxes[i]
+            if(cartBox.id === index){
+            var quantityElement = cartBox.getElementsByClassName('cart-quantity')[0];
+            quantityElement.value = parseInt(quantityElement.value) - 1;
+            if(quantityElement.value === '0'){
+                cartBox.remove()
+                updateTotal()
+            }
+        }
+        updateTotal()
+        }
+}
+const increament = (index) => {
+    var cartBoxes = document.getElementsByClassName('cart-box')
+    if(cartBoxes.length === 0){
+        cart.classList.remove('active')
+    }
+        for ( var i = 0; i < cartBoxes.length; i++){
+            var cartBox = cartBoxes[i]
+            if(cartBox.id === index){
+            var quantityElement = cartBox.getElementsByClassName('cart-quantity')[0];
+            quantityElement.value = parseInt(quantityElement.value) + 1
+        }
+        updateTotal()
+        }
+    
+    }
+const minusPlus = (e)=>{
+    if(e.target.type == 'button'){
+        const [action, index] = e.target.id.split('-')
+        
+        if(action == 'minus'){
+            decreament(index)
+        }else{
+            increament(index)
+        }
+    }
+}
+
+document.querySelector(".cart")
+        .addEventListener('click', minusPlus)
