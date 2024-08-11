@@ -233,10 +233,12 @@ header{
     border-top: 1px solid var(--text-color);
 }
 .total-title{
+    margin-top: 10px;
     font-size: 1rem;
     font-weight: 600;
 }
 .total-price{
+    margin-top: 10px;
     margin-left: 0.5rem;
 }
 .btn-buy{
